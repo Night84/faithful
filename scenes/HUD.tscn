@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dwc7g0tf4iyoi"]
+
+[ext_resource type="Script" uid="uid://tef37gys8cp" path="res://scripts/HUD.gd" id="1_qpvh6"]
+
+[node name="HUD" type="Node2D" unique_id=1733590340]
+script = ExtResource("1_qpvh6")

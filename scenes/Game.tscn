@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://drentto1lxkv8"]
+
+[ext_resource type="Script" uid="uid://fliw8kf5hbd5" path="res://scripts/Game.gd" id="1_ibkli"]
+[ext_resource type="PackedScene" uid="uid://d38iyuksvebsd" path="res://scenes/GridMap.tscn" id="2_cpr0p"]
+[ext_resource type="PackedScene" uid="uid://be4amjk25ef1a" path="res://scenes/Player.tscn" id="2_qbsmt"]
+[ext_resource type="PackedScene" uid="uid://dwc7g0tf4iyoi" path="res://scenes/HUD.tscn" id="4_78awf"]
+
+[node name="Game" type="Node2D" unique_id=586098416]
+script = ExtResource("1_ibkli")
+
+[node name="GridMap" parent="." unique_id=974524753 instance=ExtResource("2_cpr0p")]
+
+[node name="Player" parent="." unique_id=1321094197 instance=ExtResource("2_qbsmt")]
+
+[node name="HUD" parent="." unique_id=1733590340 instance=ExtResource("4_78awf")]
+
+[node name="Label" type="Label" parent="." unique_id=1311364507]
+visible = false
+offset_right = 640.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
