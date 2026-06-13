@@ -1,5 +1,13 @@
 extends Node
 
+const TILE_FLOOR = 0
+const TILE_WALL = 1
+const TILE_EXIT = 2
+const TILE_TRAP = 3
+const TILE_BONE = 4
+const TILE_ALTAR = 5
+const TILE_GATE = 6
+
 const TILE_SIZE = 64
 const MAP_COLS = 10
 const MAP_ROWS = 10

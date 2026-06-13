@@ -5,6 +5,7 @@ signal player_died
 signal player_won
 
 var is_active: bool = true
+var traps: Array = []
 
 var grid_map: Node2D = null
 var grid_pos: Vector2i = Vector2i(5, 5)
@@ -31,12 +32,18 @@ func try_move(dir: Vector2i) -> void:
 	if grid_map == null or grid_map.is_walkable(new_pos):
 		grid_pos = new_pos
 		position = grid_to_world(grid_pos)
-		spend_heartbeat()
+		spend_heartbeats()
+		check_traps()
 		if grid_map != null and grid_map.is_exit(grid_pos):
 			emit_signal("player_won")
 
-func spend_heartbeat() -> void:
-	heartbeats -= 1
+func check_traps() -> void:
+	for trap in traps:
+		if trap.grid_pos == grid_pos:
+			spend_heartbeats(trap.damage)
+			
+func spend_heartbeats(amount: int = 1) -> void:
+	heartbeats -= amount
 	emit_signal("heartbeats_changed", heartbeats)
 	if heartbeats <= 0:
 		emit_signal("player_died")
