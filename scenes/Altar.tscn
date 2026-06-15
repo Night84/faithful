@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bylt5bw4lu73s"]
+
+[ext_resource type="Script" uid="uid://bnjh58uk45khx" path="res://scripts/Altar.gd" id="1_3h68b"]
+
+[node name="Altar" type="Node2D" unique_id=194535381]
+script = ExtResource("1_3h68b")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1974515695]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color(0.5761915, 0, 0.18077317, 1)

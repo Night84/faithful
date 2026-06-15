@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fliw8kf5hbd5" path="res://scripts/Game.gd" id="1_ibkli"]
 [ext_resource type="PackedScene" uid="uid://be4amjk25ef1a" path="res://scenes/Player.tscn" id="2_qbsmt"]
+[ext_resource type="PackedScene" uid="uid://vmym64jei84t" path="res://scenes/Portal.tscn" id="3_aug50"]
 [ext_resource type="Script" uid="uid://8xbjs630q37l" path="res://scripts/GridMap.gd" id="3_s0nni"]
 [ext_resource type="PackedScene" uid="uid://dwc7g0tf4iyoi" path="res://scenes/HUD.tscn" id="4_78awf"]
 
@@ -14,6 +15,10 @@ script = ExtResource("3_s0nni")
 [node name="Traps" type="Node2D" parent="." unique_id=215981806]
 
 [node name="Offerings" type="Node2D" parent="." unique_id=897192433]
+
+[node name="Altars" type="Node2D" parent="." unique_id=458199514]
+
+[node name="Portal" parent="." unique_id=1388111027 instance=ExtResource("3_aug50")]
 
 [node name="Player" parent="." unique_id=1321094197 instance=ExtResource("2_qbsmt")]
 

@@ -4,13 +4,16 @@ signal heartbeats_changed(new_value: int)
 signal player_died
 signal player_won
 signal offering_picked_up
+signal altar_activated
 
 var is_active: bool = true
 var has_offering: bool = false
 
 var traps: Array = []
 var offerings: Array = []
+var altars: Array = []
 
+var portal: Node2D = null
 var grid_map: Node2D = null
 var grid_pos: Vector2i = Vector2i(5, 5)
 var heartbeats: int = Global.MAX_HEARTBEATS
@@ -39,8 +42,8 @@ func try_move(dir: Vector2i) -> void:
 		spend_heartbeats()
 		check_traps()
 		check_offerings()
-		if grid_map != null and grid_map.is_exit(grid_pos):
-			emit_signal("player_won")
+		check_altars()
+		check_portal()
 
 func check_traps() -> void:
 	for trap in traps:
@@ -55,6 +58,17 @@ func check_offerings() -> void:
 			offerings.erase(offering)
 			emit_signal("offering_picked_up")
 			
+func check_altars() -> void:
+	for altar in altars:
+		if altar.grid_pos == grid_pos && has_offering:
+			altar.is_activated = true
+			has_offering = false
+			emit_signal("altar_activated")
+
+func check_portal() -> void:
+	if portal != null and portal.is_active and portal.grid_pos == grid_pos:
+		emit_signal("player_won")
+					
 func spend_heartbeats(amount: int = 1) -> void:
 	heartbeats -= amount
 	emit_signal("heartbeats_changed", heartbeats)

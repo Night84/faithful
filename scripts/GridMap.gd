@@ -3,11 +3,10 @@ extends Node2D
 # Typy dlaždic
 enum TileType {
 	FLOOR,
-	WALL,
-	EXIT
+	WALL
 }
 
-# Layout mapy - 0 = podlaha, 1 = zeď, 2 = exit
+# Layout mapy - 0 = podlaha, 1 = zeď
 var map_data: Array = [
 	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -17,7 +16,7 @@ var map_data: Array = [
 	[1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
 	[1, 0, 0, 0, 1, 0, 1, 1, 0, 1],
 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 0, 0, 0, 2, 1],
+	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
 	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
 
@@ -33,7 +32,6 @@ func draw_map() -> void:
 			match map_data[y][x]:
 				TileType.FLOOR: tile.color = Color(0.2, 0.2, 0.2)
 				TileType.WALL:  tile.color = Color(0.5, 0.3, 0.1)
-				TileType.EXIT:  tile.color = Color(0.0, 0.8, 0.2)
 			add_child(tile)
 
 func is_walkable(pos: Vector2i) -> bool:
@@ -42,6 +40,3 @@ func is_walkable(pos: Vector2i) -> bool:
 	if pos.y >= map_data.size() or pos.x >= map_data[pos.y].size():
 		return false
 	return map_data[pos.y][pos.x] != TileType.WALL
-
-func is_exit(pos: Vector2i) -> bool:
-	return map_data[pos.y][pos.x] == TileType.EXIT

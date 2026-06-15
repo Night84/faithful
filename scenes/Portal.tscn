@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://vmym64jei84t"]
+
+[ext_resource type="Script" uid="uid://xfhi6uy4vrv0" path="res://scripts/Portal.gd" id="1_fw72y"]
+
+[node name="Portal" type="Node2D" unique_id=1388111027]
+script = ExtResource("1_fw72y")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=725719528]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color(0, 0.8, 0.2, 1)
