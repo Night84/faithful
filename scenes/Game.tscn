@@ -13,6 +13,8 @@ script = ExtResource("3_s0nni")
 
 [node name="Traps" type="Node2D" parent="." unique_id=215981806]
 
+[node name="Offerings" type="Node2D" parent="." unique_id=897192433]
+
 [node name="Player" parent="." unique_id=1321094197 instance=ExtResource("2_qbsmt")]
 
 [node name="HUD" parent="." unique_id=1733590340 instance=ExtResource("4_78awf")]

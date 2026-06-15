@@ -13,6 +13,7 @@ var state: GameState = GameState.PLAYING
 @onready var label: Label = $Label
 @onready var hud: Node2D = $HUD
 @onready var traps_container: Node2D = $Traps
+@onready var offerings_container: Node2D = $Offerings
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") and state != GameState.PLAYING:
@@ -29,9 +30,15 @@ func _ready() -> void:
 	trap2.damage = 1
 	traps_container.add_child(trap2)
 	
+	var offering = preload("res://scenes/Offering.tscn").instantiate()
+	offering.grid_pos = Vector2i(3, 8)
+	offerings_container.add_child(offering)
+	
 	player.traps = traps_container.get_children()
+	player.offerings = offerings_container.get_children()
 	player.grid_map = grid_map
 	player.heartbeats_changed.connect(_on_heartbeats_changed)
+	player.offering_picked_up.connect(_on_offering_picked_up)
 	player.player_died.connect(_on_player_died)
 	player.player_won.connect(_on_player_won)
 		
@@ -50,4 +57,8 @@ func _on_player_won() -> void:
 	player.is_active = false
 	hud.visible = false
 	label.text = "WIN"
+	label.visible = true
+
+func _on_offering_picked_up() -> void:
+	label.text = "OFFERING"
 	label.visible = true

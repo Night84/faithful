@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ben1pmn76wqfq"]
+
+[ext_resource type="Script" uid="uid://b43to42mee2m7" path="res://scripts/Offering.gd" id="1_3ehm1"]
+
+[node name="Offering" type="Node2D" unique_id=452609211]
+script = ExtResource("1_3ehm1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=859895015]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color(0.19535008, 3.85046e-06, 0.86149865, 1)
