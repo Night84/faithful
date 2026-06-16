@@ -12,6 +12,7 @@ var has_offering: bool = false
 var traps: Array = []
 var offerings: Array = []
 var altars: Array = []
+var pickups: Array = []
 
 var portal: Node2D = null
 var grid_map: Node2D = null
@@ -39,7 +40,9 @@ func try_move(dir: Vector2i) -> void:
 	if grid_map == null or grid_map.is_walkable(new_pos):
 		grid_pos = new_pos
 		position = grid_to_world(grid_pos)
-		spend_heartbeats()
+		var picked_up = check_pickups()
+		if not picked_up:
+			spend_heartbeats()
 		check_traps()
 		check_offerings()
 		check_altars()
@@ -49,6 +52,15 @@ func check_traps() -> void:
 	for trap in traps:
 		if trap.grid_pos == grid_pos:
 			spend_heartbeats(trap.damage)
+			
+func check_pickups() -> bool:
+	for pickup in pickups:
+		if pickup.grid_pos == grid_pos:
+			restore_heartbeats(pickup.amount)
+			pickup.queue_free()
+			pickups.erase(pickup)
+			return true
+	return false
 			
 func check_offerings() -> void:
 	for offering in offerings:
@@ -74,7 +86,11 @@ func spend_heartbeats(amount: int = 1) -> void:
 	emit_signal("heartbeats_changed", heartbeats)
 	if heartbeats <= 0:
 		emit_signal("player_died")
-
+		
+func restore_heartbeats(amount: int = 1) -> void:
+	heartbeats = min(heartbeats + amount, Global.MAX_HEARTBEATS)
+	emit_signal("heartbeats_changed", heartbeats)
+		
 func grid_to_world(gpos: Vector2i) -> Vector2:
 	return Vector2(gpos.x * Global.TILE_SIZE + Global.TILE_SIZE / 2,
 				   gpos.y * Global.TILE_SIZE + Global.TILE_SIZE / 2)  + Global.MAP_OFFSET

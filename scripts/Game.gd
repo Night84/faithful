@@ -16,6 +16,7 @@ var state: GameState = GameState.PLAYING
 @onready var traps_container: Node2D = $Traps
 @onready var offerings_container: Node2D = $Offerings
 @onready var altars_container: Node2D = $Altars
+@onready var pickups_container: Node2D = $Pickups
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") and state != GameState.PLAYING:
@@ -40,12 +41,17 @@ func _ready() -> void:
 	altar.grid_pos = Vector2i(4, 8)
 	altars_container.add_child(altar)
 	
+	var pickup = preload("res://scenes/Pickup.tscn").instantiate()
+	pickup.grid_pos = Vector2i(2, 7)
+	pickups_container.add_child(pickup)
+	
 	portal.set_grid_pos(Vector2i(8, 8))
 	player.portal = portal
 	
 	player.traps = traps_container.get_children()
 	player.offerings = offerings_container.get_children()
 	player.altars = altars_container.get_children()
+	player.pickups = pickups_container.get_children()
 	player.grid_map = grid_map
 	player.heartbeats_changed.connect(_on_heartbeats_changed)
 	player.offering_picked_up.connect(_on_offering_picked_up)
