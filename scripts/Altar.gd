@@ -8,4 +8,4 @@ func _ready() -> void:
 
 func grid_to_world(gpos: Vector2i) -> Vector2:
 	return Vector2(gpos.x * Global.TILE_SIZE + Global.TILE_SIZE / 2,
-				   gpos.y * Global.TILE_SIZE + Global.TILE_SIZE / 2) + Global.MAP_OFFSET
+				   gpos.y * Global.TILE_SIZE + Global.TILE_SIZE / 2)

@@ -1,32 +1,25 @@
 [gd_scene format=3 uid="uid://drentto1lxkv8"]
 
 [ext_resource type="Script" uid="uid://fliw8kf5hbd5" path="res://scripts/Game.gd" id="1_ibkli"]
+[ext_resource type="PackedScene" uid="uid://brf3wcphlijds" path="res://scenes/levels/Level01.tscn" id="2_78awf"]
 [ext_resource type="PackedScene" uid="uid://be4amjk25ef1a" path="res://scenes/Player.tscn" id="2_qbsmt"]
-[ext_resource type="PackedScene" uid="uid://vmym64jei84t" path="res://scenes/Portal.tscn" id="3_aug50"]
-[ext_resource type="Script" uid="uid://8xbjs630q37l" path="res://scripts/GridMap.gd" id="3_s0nni"]
 [ext_resource type="PackedScene" uid="uid://dwc7g0tf4iyoi" path="res://scenes/HUD.tscn" id="4_78awf"]
 
 [node name="Game" type="Node2D" unique_id=586098416]
 script = ExtResource("1_ibkli")
 
-[node name="GridMap" type="Node2D" parent="." unique_id=520866959]
-script = ExtResource("3_s0nni")
+[node name="CurrentLevel" type="Node2D" parent="." unique_id=1751232946]
 
-[node name="Traps" type="Node2D" parent="." unique_id=215981806]
-
-[node name="Offerings" type="Node2D" parent="." unique_id=897192433]
-
-[node name="Altars" type="Node2D" parent="." unique_id=458199514]
-
-[node name="Pickups" type="Node2D" parent="." unique_id=1651581360]
-
-[node name="Portal" parent="." unique_id=1388111027 instance=ExtResource("3_aug50")]
+[node name="Level01" parent="CurrentLevel" unique_id=1434357095 instance=ExtResource("2_78awf")]
 
 [node name="Player" parent="." unique_id=1321094197 instance=ExtResource("2_qbsmt")]
+position = Vector2(340, 244)
 
 [node name="HUD" parent="." unique_id=1733590340 instance=ExtResource("4_78awf")]
+visible = false
 
 [node name="Label" type="Label" parent="." unique_id=1311364507]
+visible = false
 offset_right = 640.0
 offset_bottom = 80.0
 theme_override_font_sizes/font_size = 28

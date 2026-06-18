@@ -9,8 +9,8 @@ func _ready() -> void:
 
 func create_hearts() -> void:
 	var total_width = Global.MAX_HEARTBEATS * 30 + (Global.MAX_HEARTBEATS - 1) * 6
-	var start_x = (640 - total_width) / 2
-	var start_y = (Global.UI_HEIGHT - 25) / 2
+	var start_x = 0
+	var start_y = 0
 	
 	for i in range(Global.MAX_HEARTBEATS):
 		var heart = ColorRect.new()
@@ -30,7 +30,7 @@ func update_hearts(current: int) -> void:
 func create_offering_indicator() -> void:
 	offering_rect = ColorRect.new()
 	offering_rect.size = Vector2(20, 20)
-	offering_rect.position = Vector2(Global.MAP_WIDTH - 30, (Global.UI_HEIGHT - 20) / 2)
+	offering_rect.position = Vector2(Global.MAP_WIDTH - 30, 0)
 	offering_rect.color = Color(0.3, 0.3, 0.3)  # šedá = nemáš
 	add_child(offering_rect)
 

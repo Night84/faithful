@@ -21,8 +21,8 @@ Global="*uid://bu6m6apejkxgv"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=720
+window/size/viewport_width=704
+window/size/viewport_height=544
 window/stretch/mode="canvas_items"
 
 [physics]

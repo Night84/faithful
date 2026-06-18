@@ -14,9 +14,9 @@ var offerings: Array = []
 var altars: Array = []
 var pickups: Array = []
 
+var level: Node2D = null
 var portal: Node2D = null
-var grid_map: Node2D = null
-var grid_pos: Vector2i = Vector2i(5, 5)
+var grid_pos: Vector2i = Vector2i(10, 5)
 var heartbeats: int = Global.MAX_HEARTBEATS
 
 func _ready() -> void:
@@ -37,7 +37,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func try_move(dir: Vector2i) -> void:
 	var new_pos = grid_pos + dir
-	if grid_map == null or grid_map.is_walkable(new_pos):
+	if level == null or level.is_walkable(new_pos):
 		grid_pos = new_pos
 		position = grid_to_world(grid_pos)
 		var picked_up = check_pickups()
@@ -93,4 +93,4 @@ func restore_heartbeats(amount: int = 1) -> void:
 		
 func grid_to_world(gpos: Vector2i) -> Vector2:
 	return Vector2(gpos.x * Global.TILE_SIZE + Global.TILE_SIZE / 2,
-				   gpos.y * Global.TILE_SIZE + Global.TILE_SIZE / 2)  + Global.MAP_OFFSET
+				   gpos.y * Global.TILE_SIZE + Global.TILE_SIZE / 2)
