@@ -19,9 +19,16 @@ var portal: Node2D = null
 var grid_pos: Vector2i = Vector2i(10, 5)
 var heartbeats: int = Global.MAX_HEARTBEATS
 
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 func _ready() -> void:
 	position = grid_to_world(grid_pos)
+	sprite.animation_finished.connect(_on_animation_finished)
 
+func _on_animation_finished() -> void:
+	if sprite.animation.begins_with("walk"):
+		sprite.play("idle")
+		
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_active:
 		return
@@ -38,8 +45,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func try_move(dir: Vector2i) -> void:
 	var new_pos = grid_pos + dir
 	if level == null or level.is_walkable(new_pos):
+		play_walk_animation(dir)
 		grid_pos = new_pos
-		position = grid_to_world(grid_pos)
+		var target_position = grid_to_world(grid_pos)
+		var tween = create_tween()
+		tween.tween_property(self, "position", target_position, 0.5)
 		var picked_up = check_pickups()
 		if not picked_up:
 			spend_heartbeats()
@@ -47,6 +57,16 @@ func try_move(dir: Vector2i) -> void:
 		check_offerings()
 		check_altars()
 		check_portal()
+		
+func play_walk_animation(dir: Vector2i) -> void:
+	if dir == Vector2i(1, 0):
+		sprite.play("walk_right")
+	elif dir == Vector2i(-1, 0):
+		sprite.play("walk_left")
+	elif dir == Vector2i(0, 1):
+		sprite.play("walk_down")
+	elif dir == Vector2i(0, -1):
+		sprite.play("walk_up")
 
 func check_traps() -> void:
 	for trap in traps:
